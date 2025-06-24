@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { apiClient } from '@/lib/api-client';
+import apiClient from '@/lib/api-client';
 import { GET_CONTACTS_TO_DM_ROUTES } from '@/utils/constants';
 
 export const createChatSlice = (set, get) => ({
