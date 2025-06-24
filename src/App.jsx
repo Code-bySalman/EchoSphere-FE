@@ -7,7 +7,7 @@ import Auth from './pages/auth'
 import Profile from './pages/profile'
 import Chat from './pages/chat'
 import { useAppStore } from './store'
-import { apiClient } from './lib/api-client'
+import apiClient  from './lib/api-client'
 import { USER_INFO } from './utils/constants'
 const PrivateRoute = ({ children }) => {
   const {userInfo} = useAppStore();

@@ -6,7 +6,7 @@ import EmojiPicker from "emoji-picker-react";
 import { useAppStore } from "@/store";
 import { useSocket } from "@/context/SocketContext";
 import moment from "moment";
-import { apiClient } from "@/lib/api-client";
+import apiClient from "@/lib/api-client";
 import { UPLOAD_FILE } from "@/utils/constants";
 
 const MessageBar = () => {

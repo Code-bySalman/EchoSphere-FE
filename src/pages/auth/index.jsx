@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { toast } from 'sonner';
-import { apiClient } from '@/lib/api-client.js';
+import apiClient  from '@/lib/api-client.js';
 import { SIGNUP_ROUTE } from '@/utils/constants.js';
 import { LOGIN_ROUTE } from '../../utils/constants';
 import { useNavigate } from 'react-router-dom';

@@ -5,7 +5,7 @@ import { FiEdit2 } from "react-icons/fi";
 import { HOST, LOGOUT_ROUTE } from "@/utils/constants";
 import { useNavigate } from "react-router-dom";
 import {IoLogOut} from "react-icons/io5"
-import { apiClient } from "@/lib/api-client";
+import  apiClient  from "@/lib/api-client";
 
 const ProfileInfo = () => {
   const { userInfo, setUserInfo } = useAppStore();

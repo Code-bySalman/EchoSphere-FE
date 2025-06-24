@@ -11,7 +11,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog"
-import { apiClient } from "@/lib/api-client";
+import  apiClient  from "@/lib/api-client";
 import { CREATE_CHANNEL_ROUTE, GET_CONTACTS_FOR_CHANNEL } from "@/utils/constants";
 import { useAppStore } from "@/store";
 import { profileColors } from "@/lib/utils";

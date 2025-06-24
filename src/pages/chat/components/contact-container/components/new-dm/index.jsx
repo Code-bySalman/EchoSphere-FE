@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { apiClient } from "@/lib/api-client";
+import apiClient  from "@/lib/api-client";
 import { SEARCH_CONTACT_ROUTE } from "@/utils/constants";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useAppStore } from "@/store";

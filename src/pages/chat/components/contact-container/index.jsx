@@ -3,7 +3,7 @@ import ProfileInfo from './components/profileInfo';
 import NewDm from './components/new-dm';
 import ContactList from './components/contactList';
 import ChannelList from './components/channelList';
-import { apiClient } from '@/lib/api-client';
+import apiClient  from '@/lib/api-client';
 import {GET_CONTACTS_TO_DM_ROUTES,CREATE_USER_CHANNEL_ROUTE} from '@/utils/constants';
 import { useAppStore } from '@/store';
 import CreateChannel from './components/create-channel';

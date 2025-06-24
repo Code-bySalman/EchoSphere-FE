@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { profileColors } from "../../lib/utils";
 import gsap from "gsap";
 import { toast } from "sonner";
-import { apiClient } from "../../lib/api-client";
+import  apiClient from "../../lib/api-client";
 import { SETUP_PROFILE, UPDATE_PROFILE, UPLOAD_IMAGE, DELETE_IMAGE, HOST } from "../../utils/constants";
 
 const Profile = () => {
