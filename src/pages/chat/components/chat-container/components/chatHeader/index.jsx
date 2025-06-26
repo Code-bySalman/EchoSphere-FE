@@ -55,7 +55,6 @@ const XchatHeader = () => {
 
   const isStartCallDisabled = !!callState && callState.type !== 'active';
 
-  // The buttonClassName is still valid and handles color/cursor for FaVideo
   const buttonClassName = `text-2xl ${
     callState && callState.type === 'active' 
       ? 'text-red-500 hover:text-red-400' 
@@ -68,10 +67,10 @@ const XchatHeader = () => {
                     bg-gradient-to-br from-gray-900 to-black 
                     dark:from-gray-900 dark:to-black // Added dark mode for consistency
                     flex items-center justify-between 
-                    px-4 sm:px-6 md:px-8 lg:px-12'> {/* Adjusted responsive padding here */}
+                    px-4 sm:px-6 md:px-8 lg:px-12'>
       <div className='flex gap-5 items-center w-full justify-between'>
-        {/* Left side: Avatar & Name */}
-        <div className='flex gap-3 items-center'> {/* Removed unnecessary justify-center here */}
+       
+        <div className='flex gap-3 items-center'> 
           <div className="flex-shrink-0 w-12 h-12">
             <Avatar className="w-full h-full rounded-full overflow-hidden border-2 border-blue-500 shadow-md">
               {selectedChatData.image ? (
@@ -89,16 +88,15 @@ const XchatHeader = () => {
               )}
             </Avatar>
           </div>
-          {/* Removed mr-220, relying on flexbox for spacing */}
+          
           <div className='flex flex-col'>
             <span className='text-white text-lg font-semibold'>
               {displayName}
             </span>
           </div>
         </div>
-        
-        {/* Right side: Call & Close Icons */}
-        <div className='flex items-center gap-4 sm:gap-5'> {/* Adjusted gap for smaller screens */}
+      
+        <div className='flex items-center gap-4 sm:gap-5'>
           {selectedChatData && selectedChatData.id !== userInfo.id && ( 
             <button
               onClick={handleCallAction} 
@@ -110,9 +108,9 @@ const XchatHeader = () => {
           )}
           <button 
             className='text-neutral-500 hover:border-none hover:text-white duration-300 transition-all'
-            onClick={closeChat} // Directly apply onClick
+            onClick={closeChat} 
           >
-            {/* Removed mr-[400px] - the icon will now be correctly positioned */}
+            
             <RiCloseFill className='text-3xl' /> 
           </button>
         </div>

@@ -5,11 +5,11 @@ import apiClient  from '@/lib/api-client.js';
 import { SIGNUP_ROUTE } from '@/utils/constants.js';
 import { LOGIN_ROUTE } from '../../utils/constants';
 import { useNavigate } from 'react-router-dom';
-import { useAppStore } from '../../store'; // Correct path to your store
+import { useAppStore } from '../../store'; 
 
 const Auth = () => {
   const navigate = useNavigate();
-  // Destructure resetChatState from useAppStore
+ 
   const { setUserInfo, resetChatState } = useAppStore();
   const [isLogin, setIsLogin] = useState(true);
   const [loginEmail, setLoginEmail] = useState('');
@@ -123,7 +123,7 @@ const Auth = () => {
                     ...user,
                     token: token
                 });
-                // IMPORTANT: Reset chat state on successful login
+               
                 resetChatState();
                 
                 if(user.profileSetup) {
@@ -158,7 +158,7 @@ const Auth = () => {
                     ...user,
                     token: token
                 });
-                // IMPORTANT: Reset chat state on successful signup
+             
                 resetChatState();
                 navigate('/profile');
             }
