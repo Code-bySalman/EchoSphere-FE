@@ -1,23 +1,23 @@
-import { useState, useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { toast } from 'sonner';
-import apiClient from '@/lib/api-client.js';
-import { SIGNUP_ROUTE } from '@/utils/constants.js';
-import { LOGIN_ROUTE } from '../../utils/constants';
-import { useNavigate } from 'react-router-dom';
-import { useAppStore } from '../../store';
+import { useState, useRef, useEffect } from 'react'
+import { gsap } from 'gsap'
+import { toast } from 'sonner'
+import apiClient from '@/lib/api-client.js'
+import { SIGNUP_ROUTE } from '@/utils/constants.js'
+import { LOGIN_ROUTE } from '../../utils/constants'
+import { useNavigate } from 'react-router-dom'
+import { useAppStore } from '../../store'
 
 const Auth = () => {
-  const navigate = useNavigate();
-  const { setUserInfo, resetChatState } = useAppStore();
-  const [isLogin, setIsLogin] = useState(true);
-  const [loginEmail, setLoginEmail] = useState('');
-  const [loginPassword, setLoginPassword] = useState('');
-  const [signupName, setSignupName] = useState('');
-  const [signupEmail, setSignupEmail] = useState('');
-  const [signupPassword, setSignupPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const formSectionRef = useRef(null);
+  const navigate = useNavigate()
+  const { setUserInfo, resetChatState } = useAppStore()
+  const [isLogin, setIsLogin] = useState(true)
+  const [loginEmail, setLoginEmail] = useState('')
+  const [loginPassword, setLoginPassword] = useState('')
+  const [signupName, setSignupName] = useState('')
+  const [signupEmail, setSignupEmail] = useState('')
+  const [signupPassword, setSignupPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const formSectionRef = useRef(null)
 
   useEffect(() => {
     if (formSectionRef.current) {
@@ -25,9 +25,9 @@ const Auth = () => {
         formSectionRef.current,
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }
-      );
+      )
     }
-  }, [isLogin]);
+  }, [isLogin])
 
   const toggleForm = () => {
     if (formSectionRef.current) {
@@ -36,120 +36,128 @@ const Auth = () => {
         y: -15,
         duration: 0.3,
         onComplete: () => {
-          setIsLogin(!isLogin);
+          setIsLogin(!isLogin)
           if (isLogin) {
-            setSignupName('');
-            setSignupEmail('');
-            setSignupPassword('');
-            setConfirmPassword('');
+            setSignupName('')
+            setSignupEmail('')
+            setSignupPassword('')
+            setConfirmPassword('')
           } else {
-            setLoginEmail('');
-            setLoginPassword('');
+            setLoginEmail('')
+            setLoginPassword('')
           }
         },
-      });
+      })
     } else {
-      setIsLogin(!isLogin);
+      setIsLogin(!isLogin)
     }
-  };
+  }
 
   const validateLogin = () => {
-    if (!loginEmail.trim()) {
-      toast.error('Email is required.');
-      return false;
+    const email = loginEmail.trim().toLowerCase()
+    if (!email) {
+      toast.error('Email is required.')
+      return false
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginEmail)) {
-      toast.error('Please enter a valid email address.');
-      return false;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast.error('Please enter a valid email address.')
+      return false
     }
     if (!loginPassword.trim()) {
-      toast.error('Password is required.');
-      return false;
+      toast.error('Password is required.')
+      return false
     }
-    return true;
+    return true
   }
 
   const validateSignup = () => {
     if (!signupName.trim()) {
-      toast.error('Name is required.');
-      return false;
+      toast.error('Name is required.')
+      return false
     }
-    if (!signupEmail.trim()) {
-      toast.error('Email is required.');
-      return false;
+    const email = signupEmail.trim().toLowerCase()
+    if (!email) {
+      toast.error('Email is required.')
+      return false
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signupEmail)) {
-      toast.error('Please enter a valid email address.');
-      return false;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast.error('Please enter a valid email address.')
+      return false
     }
     if (!signupPassword.trim()) {
-      toast.error('Password is required.');
-      return false;
+      toast.error('Password is required.')
+      return false
     }
     if (signupPassword.length < 6) {
-      toast.error('Password must be at least 6 characters long.');
-      return false;
+      toast.error('Password must be at least 6 characters long.')
+      return false
     }
     if (!confirmPassword.trim()) {
-      toast.error('Confirm password is required.');
-      return false;
+      toast.error('Confirm password is required.')
+      return false
     }
     if (signupPassword !== confirmPassword) {
-      toast.error('Passwords do not match.');
-      return false;
+      toast.error('Passwords do not match.')
+      return false
     }
-    return true;
-  };
+    return true
+  }
 
   const handleLoginSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (validateLogin()) {
       try {
-        const response = await apiClient.post(LOGIN_ROUTE, {
-          email: loginEmail,
-          password: loginPassword,
-        }, { withCredentials: true });
-
-        const { user, token } = response.data;
+        const response = await apiClient.post(
+          LOGIN_ROUTE,
+          {
+            email: loginEmail.trim().toLowerCase(),
+            password: loginPassword,
+          },
+          { withCredentials: true }
+        )
+        const { user, token } = response.data
         if (user && user.id) {
-          setUserInfo({ ...user, token });
-          resetChatState();
+          setUserInfo({ ...user, token })
+          resetChatState()
           if (user.profileSetup) {
-            navigate("/chat");
+            navigate('/chat')
           } else {
-            navigate("/profile");
+            navigate('/profile')
           }
         }
       } catch (error) {
-        console.error("Login API call failed:", error.response || error);
-        toast.error(error.response?.data?.message || 'Login failed. Please check your credentials.');
+        console.error('Login API call failed:', error.response || error)
+        toast.error(error.response?.data?.message || 'Login failed. Please check your credentials.')
       }
     }
-  };
+  }
 
   const handleSignupSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (validateSignup()) {
       try {
-        const response = await apiClient.post(SIGNUP_ROUTE, {
-          name: signupName,
-          email: signupEmail.trim().toLowerCase(),
-          password: signupPassword,
-          confirmPassword,
-        }, { withCredentials: true });
-
-        const { user, token } = response.data;
+        const response = await apiClient.post(
+          SIGNUP_ROUTE,
+          {
+            name: signupName,
+            email: signupEmail.trim().toLowerCase(),
+            password: signupPassword,
+            confirmPassword,
+          },
+          { withCredentials: true }
+        )
+        const { user, token } = response.data
         if (response.status === 201) {
-          setUserInfo({ ...user, token });
-          resetChatState();
-          navigate('/profile');
+          setUserInfo({ ...user, token })
+          resetChatState()
+          navigate('/profile')
         }
       } catch (error) {
-        console.error("Signup API call failed:", error.response || error);
-        toast.error(error.response?.data?.message || 'Signup failed. Please try again.');
+        console.error('Signup API call failed:', error.response || error)
+        toast.error(error.response?.data?.message || 'Signup failed. Please try again.')
       }
     }
-  };
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black w-full flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
